@@ -1302,6 +1302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400e2700a0685f04b8cfe76c549db070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  atkRate: 1
 --- !u!136 &2044983136652782690
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1461,6 +1462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ea165b48642d264da6b8f8a66b18fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damgeAmout: 10
 --- !u!65 &7224573820569838991
 BoxCollider:
   m_ObjectHideFlags: 0
