@@ -560,6 +560,73 @@ Transform:
   - {fileID: 577243096421875431}
   m_Father: {fileID: 8832057231944083326}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2836813670683922323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1495740607565467449}
+  - component: {fileID: 3639795361872383372}
+  - component: {fileID: 4926769649671586193}
+  m_Layer: 0
+  m_Name: PunchLeft
+  m_TagString: EnemyPunch
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1495740607565467449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2836813670683922323}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.3621, y: 0.483, z: 0.2411}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4803068124873373537}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3639795361872383372
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2836813670683922323}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.18441094, y: 0.10148526, z: 0.15907797}
+  m_Center: {x: 0.2865531, y: -0.47014955, z: -0.21667454}
+--- !u!114 &4926769649671586193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2836813670683922323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea165b48642d264da6b8f8a66b18fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damgeAmout: 10
 --- !u!1 &3017773862229568050
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,7 +687,8 @@ Transform:
   m_LocalPosition: {x: 0.0100658415, y: 0.002173195, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1495740607565467449}
   m_Father: {fileID: 7237140058256186060}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4545448789516334065
@@ -1302,7 +1370,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 400e2700a0685f04b8cfe76c549db070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atkRate: 1
+  joystick: {fileID: 0}
+  moveSpeed: 5
 --- !u!136 &2044983136652782690
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1429,7 +1498,7 @@ GameObject:
   - component: {fileID: 6798066418322982842}
   - component: {fileID: 7224573820569838991}
   m_Layer: 0
-  m_Name: Punch
+  m_Name: PunchRight
   m_TagString: EnemyPunch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

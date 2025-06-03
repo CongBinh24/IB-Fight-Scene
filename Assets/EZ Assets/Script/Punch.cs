@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Punch : MonoBehaviour
 {
+    public enum Hand { Left, Right };
     public int damgeAmout = 10;
 
     private void Start()
