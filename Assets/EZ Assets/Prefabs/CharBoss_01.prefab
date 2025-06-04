@@ -1313,9 +1313,10 @@ GameObject:
   - component: {fileID: 238316619755985694}
   - component: {fileID: 2044983136652782690}
   - component: {fileID: 8349419717452577962}
+  - component: {fileID: 3538642331526977455}
   m_Layer: 0
   m_Name: CharBoss_01
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1371,7 +1372,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystick: {fileID: 0}
-  moveSpeed: 5
+  moveSpeed: 2
+  atkRate: 1
+  doubleTapThreshold: 0.3
+  currentHealth: 0
+  isDead: 0
 --- !u!136 &2044983136652782690
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1420,8 +1425,21 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &3538642331526977455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7421653487955196459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4807b2b64d73b47bf8a47f174c17dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthFillBar: {fileID: 0}
 --- !u!1 &7503358911111480636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1551,8 +1569,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.15407139, y: 0.17881723, z: 0.16911513}
-  m_Center: {x: -0.30680275, y: -0.4105811, z: -0.3773625}
+  m_Size: {x: 0.15, y: 0.19, z: 0.19}
+  m_Center: {x: -0.3068027, y: -0.4141315, z: -0.37120146}
 --- !u!1 &8351701650254972181
 GameObject:
   m_ObjectHideFlags: 0

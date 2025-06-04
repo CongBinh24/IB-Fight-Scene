@@ -9,18 +9,21 @@ public class Player : MonoBehaviour
     public Joystick joystick;
     public float moveSpeed = 5f;
 
-    private bool m_isAttacked;
     public float atkRate;
-    private float m_curAtkRate;
 
-
-    private float m_lastTapTime = 0f;
     public float doubleTapThreshold = 0.3f;
+
+    public int currentHealth; 
+    private int maxHealth = 100;
+
+    public bool isDead = false;
+
+
     private void Awake()
     {   
         m_anim = GetComponent<Animator>();
         m_rb = GetComponent<Rigidbody>();
-        m_curAtkRate = atkRate;
+        currentHealth = maxHealth;
     }
     void Start()
     {
@@ -28,6 +31,16 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (isDead)
+        {
+            // Dừng hẳn player khi chết
+            if (m_rb != null)
+                m_rb.velocity = Vector3.zero;
+            return;
+        }
+
+        if (joystick == null || m_rb == null) return;
+
         float horizontal = joystick.Horizontal;
         float vertical = joystick.Vertical;
 
@@ -55,37 +68,58 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Punch()
+    public void PunchRight()
     {
-        float timeSinceLastTap = Time.time - m_lastTapTime;
+        m_anim.SetTrigger(Const.ATTACK1_ANIM);
+    }
 
-        if (timeSinceLastTap <= doubleTapThreshold)
-        {
-            StopAllCoroutines();
-            StartCoroutine(DoDoublePunch());
-            m_lastTapTime = 0f;
-        }
-        else
-        {
-            AttackRight();
-            m_lastTapTime = Time.time;
-        }
+    public void PunchCombo()
+    {
+        StopAllCoroutines();
+        StartCoroutine(DoDoublePunch());
     }
 
     private IEnumerator DoDoublePunch()
     {
-        m_anim.SetTrigger(Const.ATTACK1_ANIM);
-        yield return new WaitForSeconds(0.05f); // delay 1 chút
+        yield return new WaitForSeconds(0.05f);
         m_anim.SetTrigger(Const.ATTACK_COMBO_ANIM);
     }
 
-    private void AttackRight()
+    public void TakeDamage(int damage, bool isCombo)
     {
-        m_anim.SetTrigger(Const.ATTACK1_ANIM);
+        currentHealth -= damage;
+
+        if (isCombo)
+            m_anim.SetTrigger("HeadHit");    // Đòn combo → HeadHit
+        else
+            m_anim.SetTrigger("StomachHit"); // Đòn thường → StomachHit
+        if (currentHealth <= 0)
+        {
+            isDead = true;
+            Debug.Log("player Die");
+            m_anim.SetTrigger("Knockout");
+            // Destroy(gameObject); // Xóa object nếu cần
+
+            GameObject enemyObj = GameObject.FindWithTag("Enemy");
+            if (enemyObj != null)
+            {
+                Enemy enemy = enemyObj.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.CheckDeadAndVictory(); // Gọi hàm riêng
+                }
+            }
+        }
     }
 
-    //private void AttackLeft()
-    //{
-    //    m_anim.SetTrigger(Const.ATTACK_COMBO_ANIM);
-    //}
+    public void PlayVictory()
+    {
+        if (isDead) return; // Nếu player chết rồi thì không làm gì
+
+        Animator anim = GetComponent<Animator>();
+        if (anim != null)
+        {
+            anim.SetTrigger("Victory");
+        }
+    }
 }
