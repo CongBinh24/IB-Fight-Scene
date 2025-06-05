@@ -1315,7 +1315,7 @@ GameObject:
   - component: {fileID: 8349419717452577962}
   - component: {fileID: 3538642331526977455}
   m_Layer: 0
-  m_Name: CharBoss_01
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1331,7 +1331,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.9126452, z: 0, w: 0.40875265}
   m_LocalPosition: {x: -0.03527801, y: 0.5, z: 1.1851114}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.41666666, y: 0.41666663, z: 0.41666666}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3219503247731675595}

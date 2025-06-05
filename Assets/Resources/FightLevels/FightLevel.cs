@@ -1,15 +1,21 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewFightLevel", menuName = "Boxing/FightLevel")]
 public class FightLevel : ScriptableObject
 {
     public int levelIndex;
-    public string levelName;
+    //public string levelName;
 
-    public GameObject opponentPrefab;
-    public int opponentHealth;
-    public float opponentSpeed;
-    public int opponentPower;
+    [System.Serializable]
+    public class OpponentData
+    {
+        public GameObject opponentPrefab;
+        public int opponentHealth;
+        public int opponentSpeed;
+        public int opponentPower;
+        public Vector2 spawnPosition;
+    }
 
-    public int rewardMoney;
+    public List<OpponentData> OpponentDatas;
 }

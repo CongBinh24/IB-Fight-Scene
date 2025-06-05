@@ -206,8 +206,9 @@ GameObject:
   - component: {fileID: 7467148101943785788}
   - component: {fileID: 2205575865960614004}
   - component: {fileID: 2022912822215546264}
+  - component: {fileID: 698608569009993962}
   m_Layer: 0
-  m_Name: CharMain_01
+  m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +224,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.49477625, z: 0, w: 0.8690204}
   m_LocalPosition: {x: 2.026, y: 0.5, z: -1.6164023}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.41666666, y: 0.41666663, z: 0.41666666}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7153872471448299100}
@@ -314,7 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 100
-  player: {fileID: 0}
+  player: {fileID: 7905174323926392977, guid: 775cd3b427d63974d8703d8fc87cc3ce, type: 3}
   moveSpeed: 2
   attackRange: 1
   attackDelay: 1.2
@@ -330,7 +331,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b4807b2b64d73b47bf8a47f174c17dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthFillBar: {fileID: 0}
+  healthFillBar: {fileID: 952596607654161299, guid: c62f44401d56a05478720cfeb82171c6, type: 3}
+--- !u!114 &698608569009993962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122972254015428975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f63f06f8965cc0449a9326d1a31e3398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  speed: 0.2
+  power: 10
 --- !u!1 &2211893352704014900
 GameObject:
   m_ObjectHideFlags: 0

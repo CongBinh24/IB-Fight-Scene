@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf412b9102fc4f449aa83ebf9fcee469, type: 3}
-  m_Name: NewFightLevel
+  m_Name: Level_1
   m_EditorClassIdentifier: 
-  levelIndex: 0
-  levelName: 
-  opponentPrefab: {fileID: 0}
-  opponentHealth: 0
-  opponentSpeed: 0
-  opponentPower: 0
-  rewardMoney: 0
+  levelIndex: 1
+  OpponentDatas:
+  - opponentPrefab: {fileID: 2122972254015428975, guid: 6e70ac2dd964f7e4798ba322509c7e7a, type: 3}
+    opponentHealth: 100
+    opponentSpeed: 2
+    opponentPower: 10
+    spawnPosition: {x: -399.177, y: -224.7916}
