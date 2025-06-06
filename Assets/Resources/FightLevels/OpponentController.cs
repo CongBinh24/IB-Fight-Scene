@@ -14,27 +14,27 @@ public class OpponentController : MonoBehaviour
         this.power = power; 
     }
 
-    public void SetHealthBar(PlayerHealthBar hb)
-    {
-        healthBar = hb;
-    }
+    //public void SetHealthBar(PlayerHealthBar hb)
+    //{
+    //    healthBar = hb;
+    //}
 
-    // Hàm giả lập bị sát thương
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-        if (health < 0) health = 0;
+    //// Hàm giả lập bị sát thương
+    //public void TakeDamage(int damage)
+    //{
+    //    health -= damage;
+    //    if (health < 0) health = 0;
 
-        if (healthBar != null)
-            healthBar.UpDateHealth(health);
+    //    if (healthBar != null)
+    //        healthBar.UpDateHealth(health);
 
-        if (health == 0)
-            Die();
-    }
+    //    if (health == 0)
+    //        Die();
+    //}
 
-    private void Die()
-    {
-        // Xử lý chết, hủy đối tượng...
-        //Destroy(gameObject);
-    }
+    //private void Die()
+    //{
+    //    // Xử lý chết, hủy đối tượng...
+    //    //Destroy(gameObject);
+    //}
 }

@@ -17,10 +17,11 @@ public class Player : MonoBehaviour
     private int maxHealth = 100;
 
     public bool isDead = false;
-
+    private Dialog _dialog;
     public PlayerHealthBar healthBar;
-    private void Awake()
+    void Awake()
     {   
+        _dialog = FindObjectOfType<Dialog>();
         m_anim = GetComponent<Animator>();
         m_rb = GetComponent<Rigidbody>();
         currentHealth = maxHealth;
@@ -33,7 +34,6 @@ public class Player : MonoBehaviour
     {
         if (isDead)
         {
-            // Dừng hẳn player khi chết
             if (m_rb != null)
                 m_rb.velocity = Vector3.zero;
             return;
@@ -96,7 +96,6 @@ public class Player : MonoBehaviour
         if (healthBar != null)
             healthBar.UpDateHealth(currentHealth);
 
-        // Animation đòn đánh
         if (isCombo)
             m_anim.SetTrigger("HeadHit");
         else
@@ -108,31 +107,7 @@ public class Player : MonoBehaviour
             isDead = true;
             Debug.Log("Player died");
             m_anim.SetTrigger("Knockout");
-
-            // Tìm Enemy và gọi CheckDeadAndVictory nếu có
-            GameObject enemyObj = GameObject.FindWithTag("Enemy");
-            if (enemyObj != null)
-            {
-                Enemy enemy = enemyObj.GetComponent<Enemy>();
-                if (enemy != null)
-                {
-                    enemy.CheckDeadAndVictory(); // Gọi hàm riêng
-                }
-            }
-
-            // Destroy hoặc xử lý chết ở đây (tuỳ bạn)
-            // Destroy(gameObject, 2f);
-        }
-    }
-
-    public void PlayVictory()
-    {
-        if (isDead) return; // Nếu player chết rồi thì không làm gì
-
-        Animator anim = GetComponent<Animator>();
-        if (anim != null)
-        {
-            anim.SetTrigger("Victory");
+            _dialog.ShowLose();
         }
     }
 }

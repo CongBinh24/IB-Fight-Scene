@@ -5,19 +5,26 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance;
 
     [Header("References")]
-    public Transform gameGUI;              // Bố trí các Enemy (nếu có)
-    public Transform enemyHealthPanel;     // Panel chứa thanh máu Enemy
-    public GameObject healthBarPrefab;     // Prefab HealthBar của Enemy
+    public Transform gameGUI;             
+    public Transform enemyHealthPanel;   
+    public GameObject healthBarPrefab;     
 
+    private int currentLevel = 1;
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
+    public int GetCurrentLevel()
+    {
+        return currentLevel;
+    }
+
 
     public void LoadLevel(int levelIndex)
     {
-        // Load data level (từ Resources)
+        currentLevel = levelIndex;
+
         FightLevel levelData = Resources.Load<FightLevel>($"FightLevels/Level_{levelIndex}");
         if (levelData == null)
         {
@@ -25,14 +32,13 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        // Lặp qua các đối tượng Enemy cần spawn
         foreach (var opponentData in levelData.OpponentDatas)
         {
-            // 1️⃣ Spawn Enemy
+            // Spawn Enemy
             Vector3 spawnPos = new Vector3(opponentData.spawnPosition.x, opponentData.spawnPosition.y, 0f);
             GameObject opponent = Instantiate(opponentData.opponentPrefab, spawnPos, Quaternion.identity, gameGUI);
 
-            // 2️⃣ Điều chỉnh vị trí (nếu có RectTransform)
+
             RectTransform rectTransform = opponent.GetComponent<RectTransform>();
             if (rectTransform != null)
             {
@@ -43,7 +49,7 @@ public class LevelManager : MonoBehaviour
                 opponent.transform.localPosition = new Vector3(opponentData.spawnPosition.x, opponentData.spawnPosition.y, 0f);
             }
 
-            // 3️⃣ Lấy script Enemy
+            //Lấy script Enemy
             Enemy enemyScript = opponent.GetComponent<Enemy>();
             if (enemyScript == null)
             {
@@ -51,28 +57,25 @@ public class LevelManager : MonoBehaviour
                 continue;
             }
 
-            // 4️⃣ Thiết lập máu tối đa và máu hiện tại
-            enemyScript.maxHealth = opponentData.opponentHealth;  // ⭐️ DÒNG THÊM
+            enemyScript.maxHealth = opponentData.opponentHealth; 
             enemyScript.currentHealth = opponentData.opponentHealth;
 
-            // 5️⃣ Spawn HealthBar UI trong enemyHealthPanel
+            enemyScript.speed = opponentData.opponentSpeed;
+            enemyScript.power = opponentData.opponentPower;
+
             GameObject healthBarGO = Instantiate(healthBarPrefab, enemyHealthPanel);
 
-            // 6️⃣ Gán HealthBar cho Enemy
             EnemyHealthBar enemyHealthBar = healthBarGO.GetComponent<EnemyHealthBar>();
             if (enemyHealthBar != null)
             {
                 enemyHealthBar.SetMaxHealth(opponentData.opponentHealth);
 
-                // ⭐️ THÊM DÒNG NÀY để fillbar hiển thị đúng ngay khi spawn
                 enemyHealthBar.UpdateHealth(opponentData.opponentHealth);
 
                 enemyScript.healthBar = enemyHealthBar;
             }
-
-            // 7️⃣ (nếu cần) Gán các chỉ số khác
-            // enemyScript.speed = opponentData.opponentSpeed;
-            // enemyScript.power = opponentData.opponentPower;
         }
+
+
     }
 }

@@ -10,26 +10,43 @@ public class Enemy : MonoBehaviour
     private Animator m_anim;
     private bool isAttacking = false;
 
-    public Transform player;         // Kéo thả player vào Inspector
+    public Transform player;         
     public float moveSpeed = 2f;     // Tốc độ di chuyển
-    public float attackRange = 0.8f;   // Khoảng cách để tấn công
+    public float attackRange = 0.8f; // Khoảng cách để tấn công
     public float attackDelay = 1.2f; // Độ trễ giữa các đòn tấn công
 
     public bool isDead = false;
 
     public EnemyHealthBar healthBar;
+
+    public float speed;
+    public int power;
+
+    private Dialog _dialog;
+    public void SetStats(int health, float speed, int power)
+    {
+        this.maxHealth = health;
+        this.currentHealth = health;
+        this.speed = speed;
+        this.power = power;
+    }
     void Start()
     {
+        _dialog = FindObjectOfType<Dialog>();
         m_anim = GetComponent<Animator>();
         currentHealth = maxHealth;
 
         m_anim = GetComponent<Animator>();
         currentHealth = maxHealth;
 
-        // HealthBar đã được gán sẵn → chỉ cần SetMaxHealth
         if (healthBar != null)
         {
             healthBar.SetMaxHealth(maxHealth);
+        }
+
+        if (player == null)
+        {
+            player = GameObject.FindWithTag("Player").transform;
         }
     }
 
@@ -41,7 +58,6 @@ public class Enemy : MonoBehaviour
 
         if (CheckDeadAndVictory())
         {
-            // Nếu player chết hoặc enemy chết thì không làm gì nữa
             return;
         }
 
@@ -50,18 +66,14 @@ public class Enemy : MonoBehaviour
 
         if (distance > attackRange)
         {
-            // Di chuyển về phía player
             MoveToPlayer();
         }
         else
         {
-            // Gần đủ để tấn công
             if (!isAttacking)
             {
                 StartCoroutine(AttackRoutine());
             }
-
-            // Dừng animation đi bộ
             m_anim.SetBool("Walking", false);
         }
     }
@@ -70,7 +82,7 @@ public class Enemy : MonoBehaviour
         if (isDead)
         {
             m_anim.SetBool("Walking", false);
-            return true; // không làm gì nữa
+            return true;
         }
 
         if (player != null)
@@ -79,29 +91,25 @@ public class Enemy : MonoBehaviour
             if (playerScript != null && playerScript.isDead)
             {
                 m_anim.SetBool("Walking", false);
-                m_anim.SetTrigger("Victory");
-                return true; // không di chuyển / tấn công nữa
+                return true;
             }
         }
         return false;
     }
     void MoveToPlayer()
     {
-        // Hướng di chuyển
+
         Vector3 direction = (player.position - transform.position).normalized;
         direction.y = 0;
 
-        // Di chuyển
         transform.position += direction * moveSpeed * Time.deltaTime;
 
-        // Quay mặt về player
+
         if (direction != Vector3.zero)
         {
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, 0.1f);
         }
-
-        // Bật animation "walk"
         m_anim.SetBool("Walking", true);
     }
 
@@ -111,7 +119,6 @@ public class Enemy : MonoBehaviour
 
         isAttacking = true;
 
-        // Chọn đòn tấn công ngẫu nhiên
         bool doCombo = Random.value > 0.5f;
         if (doCombo)
             PunchCombo();
@@ -140,11 +147,9 @@ public class Enemy : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        // Update HealthBar
         if (healthBar != null)
             healthBar.UpdateHealth(currentHealth);
 
-        // Animation đòn đánh
         if (isCombo)
             m_anim.SetTrigger("HeadHit");
         else
@@ -157,25 +162,9 @@ public class Enemy : MonoBehaviour
             Debug.Log("Enemy died!");
             m_anim.SetTrigger("Knockout");
             m_anim.SetBool("Walking", false);
-
-            // Gọi Player PlayVictory nếu có
-            if (player != null)
-            {
-                Player playerScript = player.GetComponent<Player>();
-                if (playerScript != null)
-                {
-                    playerScript.PlayVictory();
-                }
-            }
-
-            // Destroy sau 2 giây
-            //Destroy(gameObject, 2f);
+            _dialog.ShowWin();
+            Destroy(gameObject, 1f);
         }
     }
-
-
-
-
-
 }
 

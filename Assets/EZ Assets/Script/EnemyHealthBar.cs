@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class EnemyHealthBar : MonoBehaviour
 {
-    public Image fillImage; // Image để fillAmount
+    public Image fillImage;
 
     private float maxHealth;
 

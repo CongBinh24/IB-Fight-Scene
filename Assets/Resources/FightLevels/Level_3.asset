@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf412b9102fc4f449aa83ebf9fcee469, type: 3}
+  m_Name: Level_3
+  m_EditorClassIdentifier: 
+  levelIndex: 3
+  OpponentDatas:
+  - opponentPrefab: {fileID: 2122972254015428975, guid: 6e70ac2dd964f7e4798ba322509c7e7a, type: 3}
+    opponentHealth: 200
+    opponentSpeed: 4
+    opponentPower: 20
+    spawnPosition: {x: -399.177, y: -224.7916}
