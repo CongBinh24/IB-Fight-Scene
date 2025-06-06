@@ -1,33 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using static UnityEditor.PlayerSettings;
+﻿using UnityEngine;
 
 public class Punch : MonoBehaviour
 {
-    public enum Hand { Left, Right };
-    public int damgeAmout = 10;
+    public int damageAmount = 10;
 
-    private void Start()
+    private void OnTriggerEnter(Collider other)
     {
-    }
-    private void OnTriggerEnter(Collider col)
-    {
-        if (col.CompareTag(Const.ENEMY_TAG))
+        if (other.CompareTag("Enemy"))
         {
-            Debug.Log("Da bi dam");
-            // mất máu enemy 
-            Enemy enemy = col.GetComponent<Enemy>();
-            HealthBar healthBar = col.GetComponent<HealthBar>();
-            if (enemy != null)
+            Debug.Log("Player đã đấm trúng Enemy!");
+
+            Enemy enemy = other.GetComponent<Enemy>();
+            if (enemy != null && !enemy.isDead)
             {
                 bool isCombo = Random.value > 0.5f;
-                enemy.TakeDamage(damgeAmout,isCombo);
-
-                if(healthBar != null)
-                {
-                    healthBar.UpDateHealth(enemy.currentHealth);
-                }
+                enemy.TakeDamage(damageAmount, isCombo);
             }
         }
     }

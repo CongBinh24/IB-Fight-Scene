@@ -626,7 +626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ea165b48642d264da6b8f8a66b18fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damgeAmout: 10
+  damageAmount: 10
 --- !u!1 &3017773862229568050
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,7 +1313,6 @@ GameObject:
   - component: {fileID: 238316619755985694}
   - component: {fileID: 2044983136652782690}
   - component: {fileID: 8349419717452577962}
-  - component: {fileID: 3538642331526977455}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1377,6 +1376,7 @@ MonoBehaviour:
   doubleTapThreshold: 0.3
   currentHealth: 0
   isDead: 0
+  healthBar: {fileID: 0}
 --- !u!136 &2044983136652782690
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1427,19 +1427,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &3538642331526977455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7421653487955196459}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b4807b2b64d73b47bf8a47f174c17dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthFillBar: {fileID: 0}
 --- !u!1 &7503358911111480636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,7 +1536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ea165b48642d264da6b8f8a66b18fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damgeAmout: 10
+  damageAmount: 10
 --- !u!65 &7224573820569838991
 BoxCollider:
   m_ObjectHideFlags: 0

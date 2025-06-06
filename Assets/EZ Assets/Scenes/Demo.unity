@@ -346,11 +346,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213a653057fb1b6498d075e11bebd49a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
   currentHealth: 100
   player: {fileID: 0}
   moveSpeed: 2
   attackRange: 1.5
   attackDelay: 1.2
+  isDead: 0
+  healthBar: {fileID: 0}
 --- !u!1 &227280670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,8 +1080,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameGUI: {fileID: 1894885575}
-  healthBarPrefab: {fileID: 1821233805038818185, guid: 8d488261c2150954db565c1b97d62c3e, type: 3}
   enemyHealthPanel: {fileID: 1740926626}
+  healthBarPrefab: {fileID: 1821233805038818185, guid: 8d488261c2150954db565c1b97d62c3e, type: 3}
 --- !u!4 &750591242
 Transform:
   m_ObjectHideFlags: 0
@@ -1103,6 +1106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 766567858}
+  - component: {fileID: 766567859}
   m_Layer: 5
   m_Name: HeathBarPlayer
   m_TagString: Untagged
@@ -1131,6 +1135,19 @@ RectTransform:
   m_AnchoredPosition: {x: -221.00006, y: 152.99995}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &766567859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766567857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4807b2b64d73b47bf8a47f174c17dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthFillBar: {fileID: 113957877}
 --- !u!4 &849989775 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3224536009412638957, guid: 1dba841203c087e43afdd8fbe5b67c4e, type: 3}
@@ -1481,10 +1498,10 @@ PrefabInstance:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 1258645703}
-    - target: {fileID: 3538642331526977455, guid: 775cd3b427d63974d8703d8fc87cc3ce, type: 3}
-      propertyPath: healthFillBar
+    - target: {fileID: 238316619755985694, guid: 775cd3b427d63974d8703d8fc87cc3ce, type: 3}
+      propertyPath: healthBar
       value: 
-      objectReference: {fileID: 113957877}
+      objectReference: {fileID: 766567859}
     - target: {fileID: 7421653487955196459, guid: 775cd3b427d63974d8703d8fc87cc3ce, type: 3}
       propertyPath: m_Name
       value: Player

@@ -6,7 +6,7 @@ public class OpponentController : MonoBehaviour
     public float speed;
     public int power;
 
-    private HealthBar healthBar;
+    private PlayerHealthBar healthBar;
     public void SetData(int health, int speed, int power)
     {
         this.health = health;
@@ -14,7 +14,7 @@ public class OpponentController : MonoBehaviour
         this.power = power; 
     }
 
-    public void SetHealthBar(HealthBar hb)
+    public void SetHealthBar(PlayerHealthBar hb)
     {
         healthBar = hb;
     }

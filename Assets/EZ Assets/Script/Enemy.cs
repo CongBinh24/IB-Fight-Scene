@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private int maxHealth = 100;
+    public int maxHealth = 100;
     public int currentHealth;
 
     private Animator m_anim;
@@ -15,13 +15,22 @@ public class Enemy : MonoBehaviour
     public float attackRange = 0.8f;   // Khoảng cách để tấn công
     public float attackDelay = 1.2f; // Độ trễ giữa các đòn tấn công
 
-    private bool isDead = false;
+    public bool isDead = false;
 
-
+    public EnemyHealthBar healthBar;
     void Start()
     {
         m_anim = GetComponent<Animator>();
         currentHealth = maxHealth;
+
+        m_anim = GetComponent<Animator>();
+        currentHealth = maxHealth;
+
+        // HealthBar đã được gán sẵn → chỉ cần SetMaxHealth
+        if (healthBar != null)
+        {
+            healthBar.SetMaxHealth(maxHealth);
+        }
     }
 
     void Update()
@@ -126,21 +135,30 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage, bool isCombo)
     {
-        currentHealth -= damage;
+        if (isDead) return;
 
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        // Update HealthBar
+        if (healthBar != null)
+            healthBar.UpdateHealth(currentHealth);
+
+        // Animation đòn đánh
         if (isCombo)
             m_anim.SetTrigger("HeadHit");
         else
             m_anim.SetTrigger("StomachHit");
 
+        // Kiểm tra chết
         if (currentHealth <= 0)
         {
             isDead = true;
-            Debug.Log("Enemy Die");
-            m_anim.SetTrigger("Knockout"); 
+            Debug.Log("Enemy died!");
+            m_anim.SetTrigger("Knockout");
             m_anim.SetBool("Walking", false);
-            // Destroy(gameObject); // Xóa object nếu cần
 
+            // Gọi Player PlayVictory nếu có
             if (player != null)
             {
                 Player playerScript = player.GetComponent<Player>();
@@ -149,8 +167,13 @@ public class Enemy : MonoBehaviour
                     playerScript.PlayVictory();
                 }
             }
+
+            // Destroy sau 2 giây
+            //Destroy(gameObject, 2f);
         }
     }
+
+
 
 
 

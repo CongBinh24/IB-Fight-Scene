@@ -205,7 +205,6 @@ GameObject:
   - component: {fileID: 5391776556023854340}
   - component: {fileID: 7467148101943785788}
   - component: {fileID: 2205575865960614004}
-  - component: {fileID: 2022912822215546264}
   - component: {fileID: 698608569009993962}
   m_Layer: 0
   m_Name: Enemy
@@ -319,19 +318,8 @@ MonoBehaviour:
   moveSpeed: 2
   attackRange: 1
   attackDelay: 1.2
---- !u!114 &2022912822215546264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2122972254015428975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b4807b2b64d73b47bf8a47f174c17dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthFillBar: {fileID: 952596607654161299, guid: c62f44401d56a05478720cfeb82171c6, type: 3}
+  isDead: 0
+  healthBar: {fileID: 0}
 --- !u!114 &698608569009993962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -703,7 +691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffe85dbdfe98c184e986b9fa4d6ca7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damgeAmout: 10
+  damageAmount: 10
 --- !u!1 &3753918052796893503
 GameObject:
   m_ObjectHideFlags: 0
@@ -1423,7 +1411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffe85dbdfe98c184e986b9fa4d6ca7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damgeAmout: 10
+  damageAmount: 10
 --- !u!1 &9143022027524000029
 GameObject:
   m_ObjectHideFlags: 0

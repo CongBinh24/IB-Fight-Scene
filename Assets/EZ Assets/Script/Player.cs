@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     public bool isDead = false;
 
-
+    public PlayerHealthBar healthBar;
     private void Awake()
     {   
         m_anim = GetComponent<Animator>();
@@ -87,19 +87,29 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage, bool isCombo)
     {
-        currentHealth -= damage;
+        if (isDead) return;
 
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        // Update HealthBar
+        if (healthBar != null)
+            healthBar.UpDateHealth(currentHealth);
+
+        // Animation đòn đánh
         if (isCombo)
-            m_anim.SetTrigger("HeadHit");    // Đòn combo → HeadHit
+            m_anim.SetTrigger("HeadHit");
         else
-            m_anim.SetTrigger("StomachHit"); // Đòn thường → StomachHit
+            m_anim.SetTrigger("StomachHit");
+
+        // Kiểm tra chết
         if (currentHealth <= 0)
         {
             isDead = true;
-            Debug.Log("player Die");
+            Debug.Log("Player died");
             m_anim.SetTrigger("Knockout");
-            // Destroy(gameObject); // Xóa object nếu cần
 
+            // Tìm Enemy và gọi CheckDeadAndVictory nếu có
             GameObject enemyObj = GameObject.FindWithTag("Enemy");
             if (enemyObj != null)
             {
@@ -109,6 +119,9 @@ public class Player : MonoBehaviour
                     enemy.CheckDeadAndVictory(); // Gọi hàm riêng
                 }
             }
+
+            // Destroy hoặc xử lý chết ở đây (tuỳ bạn)
+            // Destroy(gameObject, 2f);
         }
     }
 
